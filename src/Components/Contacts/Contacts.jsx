@@ -1,6 +1,7 @@
 import { createUseStyles } from 'react-jss';
 import { connect } from 'react-redux';
 import { deleteContact } from '../../redux/operations';
+import * as selectors from '../../redux/selectors';
 
 const useStyles = createUseStyles({
     contactsList: {
@@ -69,13 +70,8 @@ const Contacts = ({ contacts, onDelete }) => {
     );
 };
 
-const getVisibleContacts = (contacts, filter) =>
-    contacts.filter(({ name }) =>
-        name.toLowerCase().includes(filter.toLowerCase()),
-    );
-
-const mapStateToProps = ({ contacts, filter }) => ({
-    contacts: getVisibleContacts(contacts, filter),
+const mapStateToProps = state => ({
+    contacts: selectors.getVisibleContacts(state),
 });
 
 const mapDispatchToProps = dispatch => ({

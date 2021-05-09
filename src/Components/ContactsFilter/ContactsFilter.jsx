@@ -1,6 +1,7 @@
 import { createUseStyles } from 'react-jss';
 import { connect } from 'react-redux';
 import * as actions from '../../redux/actions';
+import * as selectors from '../../redux/selectors';
 
 const useStyles = createUseStyles({
     filterForm: {
@@ -36,8 +37,8 @@ const ContactsFilter = ({ contacts, filter, onChange }) => {
     );
 };
 const mapStateToProps = state => ({
-    contacts: state.contacts,
-    filter: state.filter,
+    contacts: selectors.getContacts(state),
+    filter: selectors.getFilter(state),
 });
 
 const mapDispatchToProps = dispatch => ({
